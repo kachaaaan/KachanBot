@@ -20,3 +20,11 @@ def moveright():
 
 def moveleft():
     pyautogui.click(200, 538)
+
+
+def translate(i):
+    number = ""
+    for letter in str(i):
+        if letter in ["1", "2", "3", "4", "5", "6", "7"]:
+            number = letter
+    return number

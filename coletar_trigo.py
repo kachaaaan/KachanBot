@@ -1,9 +1,8 @@
 import pyautogui
 import time
 from python_imagesearch.imagesearch import imagesearch, imagesearch_from_folder
-import movements
+from functions import moveleft, moveright, moveup, movedown, translate
 
-cursorposition = pyautogui.position()
 time.sleep(2)
 confidence = 0.9
 datafolder = "trigos/"
@@ -12,19 +11,23 @@ for x in range(0, 50):
     found_flag = False
     results = (imagesearch_from_folder(datafolder, 0.9))
     for i in results:
-        if results[i] != [-1, -1]:
+        if results[i] != [-1, -1] and 1566 > (results[i][0] - 1920) > 353:
             found_flag = True
             break
     if found_flag:
         for i in results:
             if results[i] != [-1, -1]:
-                print("trigo em", results[i])
+                print(f"trigo {translate(i)} em {results[i]}")
                 pos = results[i]
-                pyautogui.click(x=pos[0], y=pos[1], clicks=1, button='left')
-                pyautogui.moveTo(cursorposition)
-                time.sleep(4)
-                break
+                if 1566 > (pos[0] - 1920) > 353:
+                    cursor_position = pyautogui.position()
+                    pyautogui.click(x=(pos[0] - 1920), y=pos[1], clicks=1, button='left')
+                    pyautogui.moveTo(cursor_position)
+                    time.sleep(4.5)
+                    break
     else:
-        movements.moveright()
+        cursor_position = pyautogui.position()
+        moveright()
+        pyautogui.moveTo(cursor_position)
         time.sleep(7)
 print("image not found")
