@@ -1,7 +1,8 @@
 import pyautogui
 import time
 from python_imagesearch.imagesearch import imagesearch, imagesearch_from_folder
-from functions import moveleft, moveright, moveup, movedown, translate
+from functions import translate, move
+
 
 time.sleep(2)
 confidence = 0.9
@@ -23,11 +24,10 @@ for x in range(0, 50):
                     cursor_position = pyautogui.position()
                     pyautogui.click(x=(pos[0] - 1920), y=pos[1], clicks=1, button='left')
                     pyautogui.moveTo(cursor_position)
-                    time.sleep(4.5)
+                    time.sleep(3)
                     break
     else:
         cursor_position = pyautogui.position()
-        moveright()
+        move("right")
         pyautogui.moveTo(cursor_position)
         time.sleep(7)
-print("image not found")
